@@ -10,17 +10,18 @@ public class MovieTicketBookingSystem
     public static void main(String[] args) 
     {
         // Initialize movies
-        movies.add(new Movie("Batman Begins", 5));
-        movies.add(new Movie("The Dark Knight", 5));
-        movies.add(new Movie("The Dark Knight Rises", 5));
-        movies.add(new Movie("Notting Hill", 5));
-        movies.add(new Movie("When Harry Met Sally", 5));
-        movies.add(new Movie("The Holiday", 5));
-        movies.add(new Movie("How to Lose a Guy in 10 Days", 5));
-        movies.add(new Movie("Kung Fu Panda", 5));
-        movies.add(new Movie("The Lion King(1994)", 5));
+        movies.add(new Movie("Batman Begins"));
+        movies.add(new Movie("The Dark Knight"));
+        movies.add(new Movie("The Dark Knight Rises"));
+        movies.add(new Movie("Notting Hill"));
+        movies.add(new Movie("When Harry Met Sally"));
+        movies.add(new Movie("The Holiday"));
+        movies.add(new Movie("How to Lose a Guy in 10 Days"));
+        movies.add(new Movie("Kung Fu Panda"));
+        movies.add(new Movie("The Lion King(1994)"));
 
         System.out.println("Welcome to the Movie Ticket Booking System!");
+        System.out.println("Available movies for booking:");
         showAvailableMovies();
 
         // Display menu
@@ -48,7 +49,6 @@ public class MovieTicketBookingSystem
                     {
                         System.out.println("Thank you for using the Movie Ticket Booking System!");
                         exit = true; // Exit the loop
-                        return;
                     }
                     default -> System.out.println("Invalid choice! Please try again.");
                 }
@@ -75,7 +75,7 @@ public class MovieTicketBookingSystem
     {
         showAvailableMovies(); 
         // Ask user to select a movie
-        System.out.print("\nEnter the number of the movie you want to book: ");
+        System.out.print("\nEnter the serial number of the movie you want to book: ");
         int movieIndex = input.nextInt() - 1;
         input.nextLine();
 
@@ -92,20 +92,18 @@ public class MovieTicketBookingSystem
         input.nextLine(); 
         if (ticketsToBook > selectedMovie.getAvailableSeats()) 
         {
-            System.out.println("Not enough seats available! Sorry.");
-            return;
+            System.out.println("Only " + selectedMovie.getAvailableSeats() + " seats left!");
         }
         else if (ticketsToBook <= 0) 
         {
             System.out.println("Invalid number of tickets! Please try again.");
-            return;
         }
         else
         {
             System.out.print("Enter your name: ");
             String customerName = input.nextLine();
             customerName = customerName.trim(); // Remove leading/trailing spaces
-
+            customerName = customerName.toLowerCase(); // Convert to lowercase
             if (selectedMovie.bookTicket(customerName, ticketsToBook)) 
             {
                 System.out.println(ticketsToBook + " tickets booked successfully for " + selectedMovie.getTitle()); // Display success message
@@ -119,7 +117,7 @@ public class MovieTicketBookingSystem
         System.out.print("\nEnter your name: ");
         String customerName = input.nextLine();
         customerName = customerName.trim(); // Remove leading/trailing spaces
-    
+        customerName = customerName.toLowerCase(); // Convert to lowercase
         // Check if the user has any bookings
         ArrayList<Movie> customerBookings = new ArrayList<>();
         for (Movie movie : movies) 
@@ -144,7 +142,7 @@ public class MovieTicketBookingSystem
         }
     
         // Ask which movie to cancel
-        System.out.print("\nEnter the number of the movie to cancel tickets for: ");
+        System.out.print("\nEnter the serial number of the movie to cancel tickets for: ");
         int movieChoice = input.nextInt() - 1; // Convert to 0-based index
         input.nextLine(); 
 
@@ -182,7 +180,7 @@ public class MovieTicketBookingSystem
     {
         System.out.println("\nSelect a movie to view booked customers:");
         showAvailableMovies();
-        System.out.print("\nEnter the number of the movie: ");
+        System.out.print("\nEnter the serial number of the movie: ");
         int movieIndex = input.nextInt() - 1;
         input.nextLine();
 
@@ -195,5 +193,4 @@ public class MovieTicketBookingSystem
         Movie selectedMovie = movies.get(movieIndex);
         selectedMovie.showBookedCustomers();
     }
-
 }
