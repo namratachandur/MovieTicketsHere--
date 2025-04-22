@@ -3,13 +3,12 @@ import java.util.ArrayList;
 public class Movie
 {
     String title;
-    int total_seats;
+    private static final int TOTAL_SEATS = 5;
     ArrayList<String> booked_customers = new ArrayList<>();
 
-    public Movie(String title, int total_seats) 
+    public Movie(String title) 
     {
         this.title = title;
-        this.total_seats = 5;
     }
 
     public String getTitle() 
@@ -19,21 +18,22 @@ public class Movie
 
     public int getTotalSeats() 
     {
-        return total_seats;
+        return TOTAL_SEATS;
     }
 
     public int getAvailableSeats() 
     {
-        return total_seats - booked_customers.size();
+        return TOTAL_SEATS - booked_customers.size();
     }
 
     public boolean bookTicket(String customer_name, int tickets)
     {
-        if (booked_customers.size() + tickets <= total_seats) 
+        if (booked_customers.size() + tickets <= TOTAL_SEATS) 
         {
+            // Book the tickets for the customer
             for (int i = 0; i < tickets; i++) 
             {
-                booked_customers.add(customer_name);
+                booked_customers.add(customer_name.toLowerCase()); // Store customer name in lowercase
             }
             System.out.println("Ticket booked for " + customer_name + " for movie " + title);
             return true;
@@ -49,7 +49,7 @@ public class Movie
     {
         if (booked_customers.contains(customer_name)) 
         {
-            booked_customers.remove(customer_name);
+            booked_customers.remove(customer_name.toLowerCase()); // Remove customer name by lowercase
             System.out.println("Ticket cancelled for " + customer_name + " for movie " + title);
         } 
         else 
@@ -65,12 +65,16 @@ public class Movie
         {
             System.out.println(customer);
         }
+        if (booked_customers.isEmpty()) 
+        {
+            System.out.println("No customers booked for this movie.");
+        }
     }
 
     public void showDetails(String title)
     {
         System.out.println("Movie Title: " + title);
-        System.out.println("Total Seats: " + total_seats);
-        System.out.println("Available Seats: " + (total_seats - booked_customers.size()));
+        System.out.println("Total Seats: " + TOTAL_SEATS);
+        System.out.println("Available Seats: " + (TOTAL_SEATS - booked_customers.size()));
     }
 }
