@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 
 public class MovieTicketBookingSystem 
 {
-    private static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in); // Scanner used across the class to read user input
     private static ArrayList<Movie> movies = new ArrayList<Movie>();
 
     public static void main(String[] args) 
@@ -15,7 +15,6 @@ public class MovieTicketBookingSystem
         movies.add(new Movie("The Holiday", "Romantic Comedy", "PG-13", 2006, "Nancy Meyers"));
         movies.add(new Movie("Kung Fu Panda", "Animation", "PG", 2008, "Mark Osborne, John Stevenson"));
         movies.add(new Movie("The Lion King(1994)", "Animation", "G", 1994, "Roger Allers, Rob Minkoff"));
-        movies.add(new Movie("Fight Club", "Drama", "R", 1999, "David Fincher"));
         movies.add(new Movie("Interstellar", "Sci-Fi", "PG-13", 2014, "Christopher Nolan"));
 
         System.out.println("Welcome to the Movie Ticket Booking System!");
