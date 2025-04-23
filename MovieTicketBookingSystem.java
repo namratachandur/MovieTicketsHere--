@@ -18,7 +18,6 @@ public class MovieTicketBookingSystem
         movies.add(new Movie("Interstellar", "Sci-Fi", "PG-13", 2014, "Christopher Nolan"));
 
         System.out.println("Welcome to the Movie Ticket Booking System!");
-        System.out.println("Available movies for booking:");
         showAvailableMovies();
 
         boolean exit = false;
