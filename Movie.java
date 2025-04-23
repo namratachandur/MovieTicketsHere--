@@ -4,11 +4,20 @@ public class Movie
 {
     String title;
     private static final int TOTAL_SEATS = 5; // Constant for total seats
+    String genre;
+    String rating;
+    int year;
+    String director;
     ArrayList<String> booked_customers = new ArrayList<>();
 
-    public Movie(String title) 
+    // Constructor to initialize movie details
+    public Movie(String title, String genre, String rating, int year, String director)
     {
         this.title = title; // Initialize the movie title
+        this.genre = genre; // Initialize the movie genre
+        this.rating = rating; // Initialize the movie rating
+        this.year = year; // Initialize the movie year
+        this.director = director; // Initialize the movie director
     }
 
     public String getTitle() // Gettter method for title
@@ -81,6 +90,10 @@ public class Movie
     {
         System.out.println("Movie Title: " + this.title);
         System.out.println("Total Seats: " + TOTAL_SEATS);
+        System.out.println("Genre: " + this.genre);
+        System.out.println("Rating: " + this.rating);
+        System.out.println("Year: " + this.year);
+        System.out.println("Director: " + this.director);
         System.out.println("Available Seats: " + getAvailableSeats());
     }
 }
