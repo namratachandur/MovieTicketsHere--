@@ -83,6 +83,7 @@ public class MovieTicketBookingSystem
         {
             // Validate movie selection
             System.out.println("Invalid movie selection!");
+            return; // Exit early
         }
 
         Movie selectedMovie = movies.get(movieIndex);
@@ -135,6 +136,7 @@ public class MovieTicketBookingSystem
         {
             // If no bookings found, display message
             System.out.println("No bookings found for " + customerName);
+            return; // Exit early
         }
     
         // Display movies the user has booked
@@ -153,6 +155,7 @@ public class MovieTicketBookingSystem
         {
             // Validate movie selection
             System.out.println("Invalid movie selection!");
+            return; // Exit early
         }
         Movie selectedMovie = customerBookings.get(movieChoice);
     
@@ -165,6 +168,7 @@ public class MovieTicketBookingSystem
         if (ticketsToCancel <= 0 || ticketsToCancel > selectedMovie.booked_customers.size()) 
         {
             System.out.println("Invalid number of tickets! Please try again.");
+            return; // Exit early
         }
     
         // Cancel tickets (remove customer entries)
@@ -189,6 +193,7 @@ public class MovieTicketBookingSystem
         {
             // Validate movie selection
             System.out.println("Invalid movie selection!");
+            return;  // Exit early
         }
         Movie selectedMovie = movies.get(movieIndex);
         selectedMovie.showBookedCustomers();
@@ -199,16 +204,25 @@ public class MovieTicketBookingSystem
     {
         System.out.println("\nSelect a movie to view details:");
         showAvailableMovies();
-        System.out.print("\nEnter the number of the movie: ");
-        int movieIndex = input.nextInt() - 1;
-        input.nextLine();
-
-        if (movieIndex < 0 || movieIndex >= movies.size()) 
+        try 
         {
-            // Validate movie selection
-            System.out.println("Invalid movie selection!");
+            System.out.print("\nEnter the number of the movie: ");
+            int movieIndex = input.nextInt() - 1;
+            input.nextLine();
+    
+            if (movieIndex < 0 || movieIndex >= movies.size()) 
+            {
+                System.out.println("Invalid movie selection!");
+                return;  // Exit early
+            }
+    
+            Movie selectedMovie = movies.get(movieIndex);
+            selectedMovie.showDetails();
+        } 
+        catch (InputMismatchException e) 
+        {
+            System.out.println("Invalid input! Please enter a number.");
+            input.nextLine();  // Clear invalid input
         }
-        Movie selectedMovie = movies.get(movieIndex);
-        selectedMovie.showDetails();
     }
 }
