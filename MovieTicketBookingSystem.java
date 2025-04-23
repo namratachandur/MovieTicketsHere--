@@ -24,15 +24,16 @@ public class MovieTicketBookingSystem
         System.out.println("Available movies for booking:");
         showAvailableMovies();
 
-        // Display menu
         boolean exit = false;
+        // Display menu and handle user input
         while (!exit) 
         {
             System.out.println("\nWhat would you like to do?");
             System.out.println("1. Book a ticket");
             System.out.println("2. Cancel a ticket");
             System.out.println("3. View booked customers");
-            System.out.println("4. Exit");
+            System.out.println("4. Show details of a movie");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             
             try
@@ -45,7 +46,8 @@ public class MovieTicketBookingSystem
                     case 1 -> bookTickets();
                     case 2 -> cancelTicket();
                     case 3 -> showBookedCustomers();
-                    case 4 -> 
+                    case 4 -> showDetails();
+                    case 5 -> 
                     {
                         System.out.println("Thank you for using the Movie Ticket Booking System!");
                         exit = true; // Exit the loop
@@ -55,6 +57,7 @@ public class MovieTicketBookingSystem
             }
             catch (InputMismatchException e) 
             {
+                // Handle invalid input (non-integer)
                 System.out.println("Invalid input! Please enter a number.");
                 input.nextLine(); // Clear the invalid input
             }
@@ -63,6 +66,7 @@ public class MovieTicketBookingSystem
 
     private static void showAvailableMovies() 
     {
+        // Display available movies and their available seats
         System.out.println("\nAvailable Movies:");
         for (int i = 0; i < movies.size(); i++) 
         {
@@ -81,8 +85,8 @@ public class MovieTicketBookingSystem
 
         if (movieIndex < 0 || movieIndex >= movies.size()) 
         {
+            // Validate movie selection
             System.out.println("Invalid movie selection!");
-            return;
         }
 
         Movie selectedMovie = movies.get(movieIndex);
@@ -92,14 +96,17 @@ public class MovieTicketBookingSystem
         input.nextLine(); 
         if (ticketsToBook > selectedMovie.getAvailableSeats()) 
         {
+            // Validate ticket count
             System.out.println("Only " + selectedMovie.getAvailableSeats() + " seats left!");
         }
         else if (ticketsToBook <= 0) 
         {
+            // Validate ticket count
             System.out.println("Invalid number of tickets! Please try again.");
         }
         else
         {
+            // Ask for customer name and book tickets
             System.out.print("Enter your name: ");
             String customerName = input.nextLine();
             customerName = customerName.trim(); // Remove leading/trailing spaces
@@ -130,8 +137,8 @@ public class MovieTicketBookingSystem
     
         if (customerBookings.isEmpty()) 
         {
+            // If no bookings found, display message
             System.out.println("No bookings found for " + customerName);
-            return;
         }
     
         // Display movies the user has booked
@@ -148,8 +155,8 @@ public class MovieTicketBookingSystem
 
         if (movieChoice < 0 || movieChoice >= customerBookings.size()) 
         {
+            // Validate movie selection
             System.out.println("Invalid movie selection!");
-            return;
         }
     
         Movie selectedMovie = customerBookings.get(movieChoice);
@@ -163,7 +170,6 @@ public class MovieTicketBookingSystem
         if (ticketsToCancel <= 0 || ticketsToCancel > selectedMovie.booked_customers.size()) 
         {
             System.out.println("Invalid number of tickets! Please try again.");
-            return;
         }
     
         // Cancel tickets (remove customer entries)
@@ -186,11 +192,30 @@ public class MovieTicketBookingSystem
 
         if (movieIndex < 0 || movieIndex >= movies.size()) 
         {
+            // Validate movie selection
             System.out.println("Invalid movie selection!");
-            return;
         }
 
         Movie selectedMovie = movies.get(movieIndex);
         selectedMovie.showBookedCustomers();
+    }
+
+    // Method to show details of a selected movie
+    public static void showDetails() 
+    {
+        System.out.println("\nSelect a movie to view details:");
+        showAvailableMovies();
+        System.out.print("\nEnter the number of the movie: ");
+        int movieIndex = input.nextInt() - 1;
+        input.nextLine();
+
+        if (movieIndex < 0 || movieIndex >= movies.size()) 
+        {
+            // Validate movie selection
+            System.out.println("Invalid movie selection!");
+        }
+
+        Movie selectedMovie = movies.get(movieIndex);
+        selectedMovie.showDetails();
     }
 }
