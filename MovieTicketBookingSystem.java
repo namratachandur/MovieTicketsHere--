@@ -10,15 +10,13 @@ public class MovieTicketBookingSystem
     public static void main(String[] args) 
     {
         // Initialize movies
-        movies.add(new Movie("Batman Begins"));
-        movies.add(new Movie("The Dark Knight"));
-        movies.add(new Movie("The Dark Knight Rises"));
-        movies.add(new Movie("Notting Hill"));
-        movies.add(new Movie("When Harry Met Sally"));
-        movies.add(new Movie("The Holiday"));
-        movies.add(new Movie("How to Lose a Guy in 10 Days"));
-        movies.add(new Movie("Kung Fu Panda"));
-        movies.add(new Movie("The Lion King(1994)"));
+        movies.add(new Movie("The Dark Knight", "Action Drama", "PG-13", 2008, "Christopher Nolan"));
+        movies.add(new Movie("Notting Hill", "Romantic Comedy", "PG-13", 1999, "Roger Michell"));
+        movies.add(new Movie("The Holiday", "Romantic Comedy", "PG-13", 2006, "Nancy Meyers"));
+        movies.add(new Movie("Kung Fu Panda", "Animation", "PG", 2008, "Mark Osborne, John Stevenson"));
+        movies.add(new Movie("The Lion King(1994)", "Animation", "G", 1994, "Roger Allers, Rob Minkoff"));
+        movies.add(new Movie("Fight Club", "Drama", "R", 1999, "David Fincher"));
+        movies.add(new Movie("Interstellar", "Sci-Fi", "PG-13", 2014, "Christopher Nolan"));
 
         System.out.println("Welcome to the Movie Ticket Booking System!");
         System.out.println("Available movies for booking:");
@@ -158,7 +156,6 @@ public class MovieTicketBookingSystem
             // Validate movie selection
             System.out.println("Invalid movie selection!");
         }
-    
         Movie selectedMovie = customerBookings.get(movieChoice);
     
         // Ask how many tickets to cancel
@@ -195,7 +192,6 @@ public class MovieTicketBookingSystem
             // Validate movie selection
             System.out.println("Invalid movie selection!");
         }
-
         Movie selectedMovie = movies.get(movieIndex);
         selectedMovie.showBookedCustomers();
     }
@@ -214,7 +210,6 @@ public class MovieTicketBookingSystem
             // Validate movie selection
             System.out.println("Invalid movie selection!");
         }
-
         Movie selectedMovie = movies.get(movieIndex);
         selectedMovie.showDetails();
     }
